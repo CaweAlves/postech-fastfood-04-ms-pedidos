@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fastfood-pedido-config
+  namespace: fastfood
+data:
+  PROFILE: 'DEV'
