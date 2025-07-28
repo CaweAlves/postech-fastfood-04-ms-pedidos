@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastfood-pedido-deployment
+  namespace: fastfood
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: fastfood-pedido
+  template:
+    metadata:
+      labels:
+        app: fastfood-pedido
+    spec:
+      containers:
+        - name: fastfood-pedido
+          image: ${DOCKER_USERNAME}/fastfood-pedido:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials-pedido
+                  key: SPRING_DATASOURCE_URL
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials-pedido
+                  key: POSTGRES_USER
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials-pedido
+                  key: POSTGRES_PASSWORD
+            - name: SPRING_DATASOURCE_DB
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials-pedido
+                  key: POSTGRES_DB
+            - name: AWS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-credentials
+                  key: AWS_ACCESS_KEY
+            - name: AWS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-credentials
+                  key: AWS_SECRET_KEY
+            - name: AWS_SESSION_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: aws-credentials
+                  key: AWS_SESSION_TOKEN
+            - name: AWS_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: aws-credentials
+                  key: AWS_REGION
+            - name: ENDERECO_FILA_pedidos
+              valueFrom:
+                secretKeyRef:
+                  name: aws-credentials
+                  key: ENDERECO_FILA_pedidos
+            - name: APP_SERVICES_PRODUTOS
+              valueFrom:
+                secretKeyRef:
+                  name: app-services
+                  key: APP_SERVICES_PRODUTOS
+            - name: APP_SERVICES_PAGAMENTOS
+              valueFrom:
+                secretKeyRef:
+                  name: app-services
+                  key: APP_SERVICES_PAGAMENTOS
+            - name: AWS_ENDPOINT
+              value: ''
