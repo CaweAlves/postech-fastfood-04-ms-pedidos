@@ -16,6 +16,9 @@ Este projeto é um microserviço responsável pelo gerenciamento de pedidos do s
 - `k8s/`: Manifests para Kubernetes
 - `run/`: Scripts e arquivos de configuração para execução local (Docker Compose, inicialização de banco e SQS)
 
+## SonarQube
+- https://sonarcloud.io/summary/overall?id=CaweAlves_postech-fastfood-04-ms-pedidos&branch=main
+
 ## Como Executar Localmente
 
 ### Pré-requisitos
