@@ -35,4 +35,4 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=LucasFerrazSilva_postech-fastfood-04-ms-pedido -Dsonar.organization=lucasferraz95 -Dsonar.host.url=https://sonarcloud.io -Pcoverage
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=CaweAlves_postech-fastfood-04-ms-pedidos -Dsonar.organization=cawealves -Dsonar.host.url=https://sonarcloud.io -Pcoverage
